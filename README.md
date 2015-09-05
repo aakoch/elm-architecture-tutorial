@@ -147,7 +147,7 @@ Notice we are not *performing* actions as they get sent back to our app. We are 
 
 In example 1 we created a basic counter, but how does that pattern scale when we want *two* counters? Can we keep things modular?
 
-Wouldn't it be great if we could reuse all the code from example 1? The crazy thing about the Elm Architecture is that **we can reuse code with absolutely no changes**. When we created the `Counter` module in example one, it encapsulated all the implementation details so we can use them elsewhere:
+Wouldn't it be great if we could reuse all the code from example 1? The crazy thing about the Elm Architecture is that **we can reuse code with almost no changes**. When we created the `Counter` module in example one, it encapsulated all the implementation details so we can use them elsewhere:
 
 ```elm
 module Counter (Model, init, Action, update, view) where
