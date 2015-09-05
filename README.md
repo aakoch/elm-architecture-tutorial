@@ -150,10 +150,12 @@ In example 1 we created a basic counter, but how does that pattern scale when we
 Wouldn't it be great if we could reuse all the code from example 1? The crazy thing about the Elm Architecture is that **we can reuse code with almost no changes**. When we created the `Counter` module in example one, it encapsulated all the implementation details so we can use them elsewhere:
 
 ```elm
+-- the first example didn't have these function names
 module Counter (Model, init, Action, update, view) where
 
 type Model
 
+-- the first example didn't have this line, but is needed for the second section
 init : Int -> Model
 
 type Action
