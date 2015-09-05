@@ -265,7 +265,7 @@ Now we can define the set of `Actions` that can be performed on our model. We wa
 type Action
     = Insert
     | Remove
-    | Modify ID Counter.Action
+    | Update ID Counter.Action
 ```
 
 Our `Action` [union type][] is shockingly close to the high-level description. Now we can define our `update` function.
@@ -286,7 +286,7 @@ update action model =
     Remove ->
       { model | counters <- List.drop 1 model.counters }
 
-    Modify id counterAction ->
+    Update id counterAction ->
       let updateCounter (counterID, counterModel) =
             if counterID == id
                 then (counterID, Counter.update counterAction counterModel)
@@ -303,7 +303,7 @@ Here is a high-level description of each case:
 
   * `Remove` &mdash; Drop the first member of our counter list.
 
-  * `Modify` &mdash; Run through all of our counters. If we find one with
+  * `Update` &mdash; Run through all of our counters. If we find one with
     a matching ID, we perform the given `Action` on that counter.
 
 All that is left to do now is to define the `view`.
@@ -319,7 +319,7 @@ view address model =
 
 viewCounter : Signal.Address Action -> (ID, Counter.Model) -> Html
 viewCounter address (id, model) =
-  Counter.view (Signal.forwardTo address (Modify id)) model
+  Counter.view (Signal.forwardTo address (Update id)) model
 ```
 
 The fun part here is the `viewCounter` function. It uses the same old
