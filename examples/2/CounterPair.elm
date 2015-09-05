@@ -15,6 +15,9 @@ type alias Model =
 
 
 init : Int -> Int -> Model
+
+-- "top" should be renamed to "topInitialValue" or something like that
+-- "bottom" should be also renamed to "bottomInitialValue" or something like that
 init top bottom =
     { topCounter = Counter.init top
     , bottomCounter = Counter.init bottom
