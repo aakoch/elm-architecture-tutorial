@@ -28,7 +28,7 @@ init =
 type Action
     = Insert
     | Remove
-    | Modify ID Counter.Action
+    | Update ID Counter.Action
 
 
 update : Action -> Model -> Model
@@ -46,7 +46,7 @@ update action model =
     Remove ->
       { model | counters <- List.drop 1 model.counters }
 
-    Modify id counterAction ->
+    Update id counterAction ->
       let updateCounter (counterID, counterModel) =
             if counterID == id
                 then (counterID, Counter.update counterAction counterModel)
@@ -68,4 +68,4 @@ view address model =
 
 viewCounter : Signal.Address Action -> (ID, Counter.Model) -> Html
 viewCounter address (id, model) =
-  Counter.view (Signal.forwardTo address (Modify id)) model
+  Counter.view (Signal.forwardTo address (Update id)) model
